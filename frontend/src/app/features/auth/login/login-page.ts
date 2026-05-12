@@ -38,6 +38,7 @@ export class LoginPage {
 
   error = '';
   loading = false;
+  passwordVisible = false;
   form = this.fb.nonNullable.group({
     email: ['admin@opsboard.test', [Validators.required, Validators.email]],
     password: ['password', [Validators.required]]

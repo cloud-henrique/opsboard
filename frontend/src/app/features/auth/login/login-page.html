@@ -29,7 +29,23 @@
         <mat-form-field>
           <mat-label>Senha</mat-label>
           <mat-icon matPrefix>lock</mat-icon>
-          <input matInput type="password" formControlName="password" autocomplete="current-password" />
+          <input
+            matInput
+            [type]="passwordVisible ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="current-password"
+          />
+          <button
+            mat-icon-button
+            matIconSuffix
+            type="button"
+            [attr.aria-label]="passwordVisible ? 'Ocultar senha' : 'Exibir senha'"
+            [attr.aria-pressed]="passwordVisible"
+            (mousedown)="$event.preventDefault()"
+            (click)="passwordVisible = !passwordVisible"
+          >
+            <mat-icon>{{ passwordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
           @if (form.controls.password.touched && form.controls.password.invalid) {
             <mat-error>Informe a senha.</mat-error>
           }
