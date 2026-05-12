@@ -8,7 +8,7 @@
 <section class="surface content-section">
   <form class="filters-grid" [formGroup]="filters" (ngSubmit)="load(0)">
     <mat-form-field>
-      <mat-label>Acao</mat-label>
+      <mat-label>Ação</mat-label>
       <mat-select formControlName="action">
         <mat-option value="">Todas</mat-option>
         @for (action of actionOptions; track action[0]) {
@@ -55,7 +55,7 @@
     <div class="table-wrap">
       <table mat-table [dataSource]="logs()">
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef>Acao</th>
+          <th mat-header-cell *matHeaderCellDef>Ação</th>
           <td mat-cell *matCellDef="let log">{{ actionLabel(log.action) }}</td>
         </ng-container>
 
