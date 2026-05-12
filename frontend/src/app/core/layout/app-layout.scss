@@ -62,15 +62,32 @@
   flex: 1;
 }
 
-.user-block {
+.user-menu-trigger {
+  color: var(--ops-graphite);
+}
+
+.user-menu-trigger .material-icons-outlined {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.user-menu-summary {
   display: grid;
-  margin-right: ops.space(8);
-  text-align: right;
+  min-width: 184px;
+  padding: ops.space(12) ops.space(16);
   line-height: ops.line-height(compact);
 }
 
-.user-block small {
+.user-menu-summary strong,
+.user-menu-summary span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-menu-summary span {
   color: var(--ops-muted);
+  font-size: ops.font-size(sm);
 }
 
 .main-content {

@@ -25,14 +25,27 @@
       <span class="topbar-title">Operações internas</span>
       <span class="spacer"></span>
       @if (auth.currentUser(); as user) {
-        <div class="user-block">
-          <span>{{ user.name }}</span>
-          <small>{{ roleLabels[user.role] }}</small>
-        </div>
+        <button
+          mat-icon-button
+          type="button"
+          class="user-menu-trigger"
+          aria-label="Abrir menu do usuário"
+          [matMenuTriggerFor]="userMenu"
+        >
+          <span class="material-icons-outlined" aria-hidden="true">account_circle</span>
+        </button>
+
+        <mat-menu #userMenu="matMenu" xPosition="before" class="user-menu">
+          <div class="user-menu-summary">
+            <strong>{{ user.name }}</strong>
+            <span>{{ roleLabels[user.role] }}</span>
+          </div>
+          <button mat-menu-item type="button" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+          </button>
+        </mat-menu>
       }
-      <button mat-icon-button type="button" aria-label="Sair" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-      </button>
     </mat-toolbar>
 
     <main class="main-content">
