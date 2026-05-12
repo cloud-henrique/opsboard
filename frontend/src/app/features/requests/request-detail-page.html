@@ -1,0 +1,125 @@
+<header class="page-header">
+  <div>
+    <h1>Detalhe da solicitação</h1>
+    <p>Dados principais, acoes permitidas e historico de alterações.</p>
+  </div>
+  <div class="actions-row">
+    <a mat-stroked-button routerLink="/app/requests">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </a>
+    @if (request(); as item) {
+      @if (permissions.canEditRequest(item)) {
+        <a mat-flat-button [routerLink]="['/app/requests', item.id, 'edit']">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </a>
+      }
+    }
+  </div>
+</header>
+
+@if (loading()) {
+  <mat-progress-bar mode="indeterminate" />
+} @else if (error()) {
+  <div class="surface error-state">{{ error() }}</div>
+} @else if (request(); as item) {
+  <section class="detail-grid">
+    <article class="surface content-section main-card">
+      <div class="title-row">
+        <div>
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.description }}</p>
+        </div>
+        <span [class]="'priority-pill ' + priorityClass(item.priority)">{{ priorityLabels[item.priority] }}</span>
+      </div>
+
+      <dl>
+        <div>
+          <dt>Status</dt>
+          <dd><span [class]="'status-pill ' + statusClass(item.status)">{{ statusLabels[item.status] }}</span></dd>
+        </div>
+        <div>
+          <dt>Categoria</dt>
+          <dd>{{ item.category?.name ?? '-' }}</dd>
+        </div>
+        <div>
+          <dt>Solicitante</dt>
+          <dd>{{ item.requester?.name ?? '-' }}</dd>
+        </div>
+        <div>
+          <dt>Responsável</dt>
+          <dd>{{ item.assignee?.name ?? '-' }}</dd>
+        </div>
+        <div>
+          <dt>Prazo</dt>
+          <dd>{{ item.due_date ? (item.due_date | date:'mediumDate') : '-' }}</dd>
+        </div>
+        <div>
+          <dt>Criada em</dt>
+          <dd>{{ item.created_at | date:'short' }}</dd>
+        </div>
+      </dl>
+    </article>
+
+    <aside class="surface content-section actions-card">
+      <h2>Ações</h2>
+      @if (permissions.canChangeStatus(item)) {
+        <form [formGroup]="statusForm" class="action-form">
+          <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              @for (status of statusOptions; track status[0]) {
+                <mat-option [value]="status[0]">{{ status[1] }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <button mat-stroked-button type="button" (click)="changeStatus()">Alterar status</button>
+        </form>
+      }
+
+      @if (permissions.canAssignRequest()) {
+        <form [formGroup]="assignForm" class="action-form">
+          <mat-form-field>
+            <mat-label>Responsável</mat-label>
+            <mat-select formControlName="assignee_id">
+              <mat-option [value]="null">Sem responsável</mat-option>
+              @for (user of users(); track user.id) {
+                <mat-option [value]="user.id">{{ user.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <button mat-stroked-button type="button" (click)="assign()">Atribuir</button>
+        </form>
+      }
+
+      @if (permissions.canChangeStatus(item)) {
+        <div class="actions-row">
+          <button mat-flat-button type="button" (click)="resolve()">
+            <mat-icon>task_alt</mat-icon>
+            Resolver
+          </button>
+          <button mat-stroked-button type="button" (click)="cancel()">
+            <mat-icon>cancel</mat-icon>
+            Cancelar
+          </button>
+        </div>
+      }
+    </aside>
+  </section>
+
+  <section class="surface content-section timeline">
+    <h2>Auditoria</h2>
+    @for (log of auditLogs(); track log.id) {
+      <article class="timeline-item">
+        <div>
+          <strong>{{ actionLabel(log.action) }}</strong>
+          <span>{{ log.user?.name ?? 'Sistema' }} - {{ log.created_at | date:'short' }}</span>
+        </div>
+        <pre>{{ {old: log.old_values, new: log.new_values} | json }}</pre>
+      </article>
+    } @empty {
+      <p class="empty-state">Nenhum evento de auditoria para esta solicitação.</p>
+    }
+  </section>
+}

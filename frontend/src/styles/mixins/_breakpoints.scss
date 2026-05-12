@@ -1,0 +1,13 @@
+@use '../tokens/breakpoints' as tokens;
+
+@mixin up($name) {
+  @media (min-width: tokens.breakpoint($name)) {
+    @content;
+  }
+}
+
+@mixin down($name) {
+  @media (max-width: tokens.breakpoint($name)) {
+    @content;
+  }
+}

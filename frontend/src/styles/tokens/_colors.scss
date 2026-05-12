@@ -1,0 +1,51 @@
+$ops-copper: #a94726;
+$ops-orange: #c65a2e;
+$ops-brown: #6e2d1d;
+$ops-graphite: #15171c;
+$ops-offwhite: #f4e8de;
+$ops-surface: #fffaf6;
+$ops-surface-muted: #fff7f1;
+$ops-surface-panel: rgba(255, 255, 255, 0.82);
+$ops-sidebar: #fffdfb;
+$ops-border: #e4d4ca;
+$ops-muted: #6b6260;
+$ops-success: #2e7d5b;
+$ops-warning: #b26a00;
+$ops-danger: #b3261e;
+$ops-white: #ffffff;
+$ops-primary-container: #ffd9ca;
+$ops-on-primary-container: #351000;
+$ops-bar-track: #f1e3db;
+$ops-topbar: rgba(255, 250, 246, 0.92);
+
+@mixin color-variables {
+  :root {
+    --ops-copper: #{$ops-copper};
+    --ops-orange: #{$ops-orange};
+    --ops-brown: #{$ops-brown};
+    --ops-graphite: #{$ops-graphite};
+    --ops-offwhite: #{$ops-offwhite};
+    --ops-surface: #{$ops-surface};
+    --ops-surface-muted: #{$ops-surface-muted};
+    --ops-surface-panel: #{$ops-surface-panel};
+    --ops-sidebar: #{$ops-sidebar};
+    --ops-border: #{$ops-border};
+    --ops-muted: #{$ops-muted};
+    --ops-success: #{$ops-success};
+    --ops-warning: #{$ops-warning};
+    --ops-danger: #{$ops-danger};
+    --ops-white: #{$ops-white};
+    --ops-primary-container: #{$ops-primary-container};
+    --ops-on-primary-container: #{$ops-on-primary-container};
+    --ops-bar-track: #{$ops-bar-track};
+    --ops-topbar: #{$ops-topbar};
+    --mat-sys-primary: var(--ops-copper);
+    --mat-sys-on-primary: var(--ops-white);
+    --mat-sys-primary-container: var(--ops-primary-container);
+    --mat-sys-on-primary-container: var(--ops-on-primary-container);
+    --mat-sys-surface: var(--ops-surface);
+    --mat-sys-background: var(--ops-surface-muted);
+    --mat-sys-on-surface: var(--ops-graphite);
+    --mat-sys-outline-variant: var(--ops-border);
+  }
+}

@@ -1,0 +1,42 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav class="sidebar" mode="side" opened>
+    <div class="brand">
+      <span class="brand-mark">OB</span>
+      <div>
+        <strong>OpsBoard</strong>
+        <span>Painel operacional</span>
+      </div>
+    </div>
+
+    <mat-nav-list>
+      @for (item of navItems(); track item.route) {
+        @if (item.visible) {
+          <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+            <span matListItemTitle>{{ item.label }}</span>
+          </a>
+        }
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="topbar">
+      <span class="topbar-title">Operações internas</span>
+      <span class="spacer"></span>
+      @if (auth.currentUser(); as user) {
+        <div class="user-block">
+          <span>{{ user.name }}</span>
+          <small>{{ roleLabels[user.role] }}</small>
+        </div>
+      }
+      <button mat-icon-button type="button" aria-label="Sair" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <main class="main-content">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

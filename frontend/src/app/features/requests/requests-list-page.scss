@@ -1,0 +1,40 @@
+@use '../../../styles/index' as ops;
+
+.filters-grid {
+  @include ops.paired-grid;
+}
+
+.search-filter {
+  grid-column: 1 / -1;
+}
+
+.filter-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: ops.space(8);
+  min-height: 56px;
+}
+
+@include ops.up(desktop) {
+  .search-filter {
+    grid-column: span 2;
+  }
+}
+
+@include ops.down(mobile) {
+  .search-filter {
+    grid-column: auto;
+  }
+}
+
+.table-panel {
+  margin-top: ops.space(16);
+  overflow: hidden;
+}
+
+td a {
+  color: var(--ops-copper);
+  font-weight: ops.font-weight(medium);
+  text-decoration: none;
+}

@@ -1,0 +1,74 @@
+@use '../../../../styles/index' as ops;
+
+.login-page {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  gap: ops.space(48);
+  align-items: center;
+  width: min(1080px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.intro {
+  max-width: 620px;
+}
+
+.eyebrow {
+  color: var(--ops-copper);
+  font-weight: ops.font-weight(bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: ops.space(10) 0 ops.space(14);
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: ops.line-height(tight);
+  letter-spacing: 0;
+}
+
+p {
+  margin: 0;
+  color: var(--ops-muted);
+  font-size: ops.font-size(xl);
+  line-height: ops.line-height(relaxed);
+}
+
+.login-panel {
+  overflow: hidden;
+  border: 1px solid var(--ops-border);
+  border-radius: ops.radius(md);
+}
+
+form {
+  display: grid;
+  gap: ops.space(12);
+  margin-top: ops.space(18);
+}
+
+.error {
+  color: var(--ops-danger);
+}
+
+.demo {
+  display: grid;
+  gap: ops.space(4);
+  margin-top: ops.space(22);
+  padding-top: ops.space(16);
+  border-top: 1px solid var(--ops-border);
+  color: var(--ops-muted);
+  font-size: ops.font-size(demo);
+}
+
+.demo strong {
+  color: var(--ops-graphite);
+}
+
+@include ops.down(mobile) {
+  .login-page {
+    grid-template-columns: 1fr;
+    gap: ops.space(22);
+    padding: ops.space(24) 0;
+  }
+}

@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+
+@mixin material-theme {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$orange-palette,
+        tertiary: mat.$red-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}

@@ -1,0 +1,92 @@
+<header class="page-header">
+  <div>
+    <h1>Auditoria</h1>
+    <p>Histórico de alterações relevantes do sistema.</p>
+  </div>
+</header>
+
+<section class="surface content-section">
+  <form class="filters-grid" [formGroup]="filters" (ngSubmit)="load(0)">
+    <mat-form-field>
+      <mat-label>Acao</mat-label>
+      <mat-select formControlName="action">
+        <mat-option value="">Todas</mat-option>
+        @for (action of actionOptions; track action[0]) {
+          <mat-option [value]="action[0]">{{ action[1] }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Usuário</mat-label>
+      <mat-select formControlName="user_id">
+        <mat-option value="">Todos</mat-option>
+        @for (user of users(); track user.id) {
+          <mat-option [value]="user.id">{{ user.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>De</mat-label>
+      <input matInput type="date" formControlName="date_from" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Até</mat-label>
+      <input matInput type="date" formControlName="date_to" />
+    </mat-form-field>
+
+    <div class="filter-actions">
+      <button mat-flat-button type="submit">Filtrar</button>
+      <button mat-button type="button" (click)="clear()">Limpar</button>
+    </div>
+  </form>
+</section>
+
+<section class="surface table-panel">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  @if (!loading() && logs().length === 0) {
+    <div class="empty-state">Nenhum log encontrado.</div>
+  } @else {
+    <div class="table-wrap">
+      <table mat-table [dataSource]="logs()">
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Acao</th>
+          <td mat-cell *matCellDef="let log">{{ actionLabel(log.action) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef>Usuário</th>
+          <td mat-cell *matCellDef="let log">{{ log.user?.name ?? 'Sistema' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="created_at">
+          <th mat-header-cell *matHeaderCellDef>Data</th>
+          <td mat-cell *matCellDef="let log">{{ log.created_at | date:'short' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="values">
+          <th mat-header-cell *matHeaderCellDef>Valores</th>
+          <td mat-cell *matCellDef="let log">
+            <pre>{{ {old: log.old_values, new: log.new_values} | json }}</pre>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <mat-paginator
+      [length]="total()"
+      [pageIndex]="pageIndex()"
+      [pageSize]="pageSize()"
+      [pageSizeOptions]="[20, 50]"
+      (page)="pageChanged($event)"
+    />
+  }
+</section>

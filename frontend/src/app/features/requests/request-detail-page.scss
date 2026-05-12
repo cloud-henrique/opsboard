@@ -1,0 +1,90 @@
+@use '../../../styles/index' as ops;
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: ops.space(16);
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: ops.space(16);
+}
+
+h2 {
+  margin: 0 0 ops.space(12);
+  font-size: ops.font-size(section-title);
+}
+
+.main-card p {
+  color: var(--ops-muted);
+  line-height: ops.line-height(body);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: ops.space(14);
+  margin: ops.space(22) 0 0;
+}
+
+dt {
+  color: var(--ops-muted);
+  font-size: ops.font-size(sm);
+}
+
+dd {
+  margin: ops.space(4) 0 0;
+  font-weight: ops.font-weight(medium);
+}
+
+.action-form {
+  display: grid;
+  gap: ops.space(8);
+  margin-bottom: ops.space(16);
+}
+
+.timeline {
+  margin-top: ops.space(16);
+}
+
+.timeline-item {
+  display: grid;
+  gap: ops.space(8);
+  padding: ops.space(14) 0;
+  border-top: 1px solid var(--ops-border);
+}
+
+.timeline-item span {
+  display: block;
+  color: var(--ops-muted);
+  font-size: ops.font-size(md);
+}
+
+pre {
+  overflow: auto;
+  margin: 0;
+  padding: ops.space(10);
+  border-radius: ops.radius(md);
+  background: var(--ops-surface-muted);
+  color: var(--ops-muted);
+}
+
+@include ops.down(content) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@include ops.up(desktop) {
+  dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@include ops.down(compact) {
+  dl {
+    grid-template-columns: 1fr;
+  }
+}

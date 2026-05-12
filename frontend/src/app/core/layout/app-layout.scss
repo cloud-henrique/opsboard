@@ -1,0 +1,97 @@
+@use '../../../styles/index' as ops;
+
+.shell {
+  min-height: 100dvh;
+  background: var(--mat-sys-background);
+}
+
+.sidebar {
+  width: 270px;
+  border-right: 1px solid var(--ops-border);
+  background: var(--ops-sidebar);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: ops.space(12);
+  padding: ops.space(22) ops.space(20);
+  border-bottom: 1px solid var(--ops-border);
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: ops.radius(md);
+  background: var(--ops-graphite);
+  color: var(--ops-white);
+  font-weight: ops.font-weight(bold);
+}
+
+.brand strong,
+.brand span {
+  display: block;
+}
+
+.brand span {
+  color: var(--ops-muted);
+  font-size: ops.font-size(nav);
+}
+
+.active-link {
+  background: color-mix(in srgb, var(--ops-copper) 10%, white);
+  color: var(--ops-copper);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid var(--ops-border);
+  background: var(--ops-topbar);
+  backdrop-filter: blur(12px);
+}
+
+.topbar-title {
+  font-weight: ops.font-weight(semibold);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-block {
+  display: grid;
+  margin-right: ops.space(8);
+  text-align: right;
+  line-height: ops.line-height(compact);
+}
+
+.user-block small {
+  color: var(--ops-muted);
+}
+
+.main-content {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: ops.space(28) 0 ops.space(48);
+}
+
+@include ops.down(shell) {
+  .sidebar {
+    width: 76px;
+  }
+
+  .brand div,
+  a span[matListItemTitle],
+  .topbar-title {
+    display: none;
+  }
+
+  .main-content {
+    width: min(100% - 20px, 1180px);
+    padding-top: ops.space(18);
+  }
+}

@@ -1,0 +1,28 @@
+@use '../../../styles/index' as ops;
+
+.filters-grid {
+  @include ops.paired-grid;
+}
+
+.filter-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: ops.space(8);
+  min-height: 56px;
+}
+
+.table-panel {
+  margin-top: ops.space(16);
+  overflow: hidden;
+}
+
+pre {
+  max-width: 360px;
+  max-height: 110px;
+  overflow: auto;
+  margin: 0;
+  color: var(--ops-muted);
+  font-size: ops.font-size(xs);
+  white-space: pre-wrap;
+}

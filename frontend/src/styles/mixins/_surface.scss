@@ -1,0 +1,19 @@
+@use '../tokens/radius' as radius;
+@use '../tokens/spacing' as spacing;
+@use './breakpoints' as media;
+@use './elevation' as elevation;
+
+@mixin surface($background: var(--ops-surface-panel), $elevation: surface) {
+  border: 1px solid var(--ops-border);
+  border-radius: radius.radius(md);
+  background: $background;
+  @include elevation.apply-elevation($elevation);
+}
+
+@mixin content-section {
+  padding: spacing.space(20);
+
+  @include media.down(mobile) {
+    padding: spacing.space(14);
+  }
+}

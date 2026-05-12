@@ -1,0 +1,5 @@
+@use '../tokens/elevation' as tokens;
+
+@mixin apply-elevation($name: surface) {
+  box-shadow: tokens.elevation($name);
+}

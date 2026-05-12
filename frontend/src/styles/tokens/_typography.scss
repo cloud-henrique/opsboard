@@ -1,0 +1,43 @@
+@use 'sass:map';
+
+$font-family: Roboto;
+
+$font-weights: (
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+);
+
+$font-sizes: (
+  xs: 0.78rem,
+  sm: 0.82rem,
+  nav: 0.83rem,
+  md: 0.86rem,
+  demo: 0.88rem,
+  base: 0.9rem,
+  lg: 1.05rem,
+  xl: 1.08rem,
+  title: 1.1rem,
+  section-title: 1.2rem,
+  kpi: 2rem,
+);
+
+$line-heights: (
+  tight: 0.98,
+  compact: 1.2,
+  body: 1.55,
+  relaxed: 1.6,
+);
+
+@function font-weight($name) {
+  @return map.get($font-weights, $name);
+}
+
+@function font-size($name) {
+  @return map.get($font-sizes, $name);
+}
+
+@function line-height($name) {
+  @return map.get($line-heights, $name);
+}

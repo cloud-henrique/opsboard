@@ -1,0 +1,10 @@
+@use 'sass:map';
+
+$elevations: (
+  none: none,
+  surface: 0 12px 30px rgba(21, 23, 28, 0.06),
+);
+
+@function elevation($name) {
+  @return map.get($elevations, $name);
+}

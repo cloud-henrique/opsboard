@@ -1,0 +1,31 @@
+@use '../../../styles/index' as ops;
+
+form {
+  display: grid;
+  gap: ops.space(18);
+}
+
+.form-grid {
+  @include ops.paired-grid;
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+.description-field {
+  grid-column: 1 / -1;
+}
+
+@include ops.up(desktop) {
+  .wide-desktop-field {
+    grid-column: span 2;
+  }
+}
+
+@include ops.down(mobile) {
+  .span-2,
+  .description-field {
+    grid-column: auto;
+  }
+}

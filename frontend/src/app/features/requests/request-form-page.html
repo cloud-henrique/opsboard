@@ -1,0 +1,84 @@
+<header class="page-header">
+  <div>
+    <h1>{{ requestId() ? 'Editar solicitação' : 'Nova solicitação' }}</h1>
+    <p>Registre o contexto, prioridade e responsável pela demanda.</p>
+  </div>
+  <a mat-stroked-button routerLink="/app/requests">
+    <mat-icon>arrow_back</mat-icon>
+    Voltar
+  </a>
+</header>
+
+<section class="surface content-section">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  @if (error()) {
+    <p class="error-state">{{ error() }}</p>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-grid">
+      <mat-form-field class="span-2">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="title" />
+        @if (form.controls.title.touched && form.controls.title.invalid) {
+          <mat-error>Informe um título.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="category_id">
+          @for (category of categories(); track category.id) {
+            <mat-option [value]="category.id">{{ category.name }}</mat-option>
+          }
+        </mat-select>
+        @if (form.controls.category_id.touched && form.controls.category_id.invalid) {
+          <mat-error>Selecione uma categoria.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Prioridade</mat-label>
+        <mat-select formControlName="priority">
+          @for (priority of priorityOptions; track priority[0]) {
+            <mat-option [value]="priority[0]">{{ priority[1] }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="wide-desktop-field">
+        <mat-label>Responsável</mat-label>
+        <mat-select formControlName="assignee_id">
+          <mat-option [value]="null">Sem responsável</mat-option>
+          @for (user of users(); track user.id) {
+            <mat-option [value]="user.id">{{ user.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="wide-desktop-field">
+        <mat-label>Prazo</mat-label>
+        <input matInput type="date" formControlName="due_date" />
+      </mat-form-field>
+
+      <mat-form-field class="description-field">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="description" rows="6"></textarea>
+        @if (form.controls.description.touched && form.controls.description.invalid) {
+          <mat-error>Informe a descrição.</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="actions-row">
+      <button mat-flat-button type="submit" [disabled]="saving()">
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+      <a mat-button routerLink="/app/requests">Cancelar</a>
+    </div>
+  </form>
+</section>

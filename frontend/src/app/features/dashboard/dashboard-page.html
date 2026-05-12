@@ -1,0 +1,73 @@
+<header class="page-header">
+  <div>
+    <h1>Dashboard</h1>
+    <p>Resumo operacional das solicitações internas.</p>
+  </div>
+</header>
+
+@if (loading()) {
+  <mat-progress-bar mode="indeterminate" />
+} @else if (error()) {
+  <div class="surface error-state">{{ error() }}</div>
+} @else if (metrics(); as data) {
+  <section class="kpi-grid">
+    <article class="surface kpi">
+      <mat-icon>inventory_2</mat-icon>
+      <span>Total</span>
+      <strong>{{ data.total_requests }}</strong>
+    </article>
+    <article class="surface kpi">
+      <mat-icon>radio_button_unchecked</mat-icon>
+      <span>Abertas</span>
+      <strong>{{ data.open_requests }}</strong>
+    </article>
+    <article class="surface kpi">
+      <mat-icon>sync</mat-icon>
+      <span>Em andamento</span>
+      <strong>{{ data.in_progress_requests }}</strong>
+    </article>
+    <article class="surface kpi warning">
+      <mat-icon>event_busy</mat-icon>
+      <span>Vencidas</span>
+      <strong>{{ data.overdue_requests }}</strong>
+    </article>
+    <article class="surface kpi success">
+      <mat-icon>task_alt</mat-icon>
+      <span>Resolvidas no mês</span>
+      <strong>{{ data.resolved_this_month }}</strong>
+    </article>
+    <article class="surface kpi">
+      <mat-icon>schedule</mat-icon>
+      <span>Tempo médio</span>
+      <strong>{{ data.average_resolution_hours }}h</strong>
+    </article>
+  </section>
+
+  <section class="charts-grid">
+    <div class="surface content-section">
+      <h2>Por status</h2>
+      @for (bucket of data.by_status; track bucket.key) {
+        <div class="bar-row">
+          <span>{{ labelForStatus(bucket) }}</span>
+          <div class="bar"><i [style.width.%]="percent(bucket, data.by_status)"></i></div>
+          <strong>{{ bucket.total }}</strong>
+        </div>
+      } @empty {
+        <p class="empty-state">Ainda não há solicitações.</p>
+      }
+    </div>
+
+    <div class="surface content-section">
+      <h2>Por prioridade</h2>
+      @for (bucket of data.by_priority; track bucket.key) {
+        <div class="bar-row">
+          <span>{{ labelForPriority(bucket) }}</span>
+          <div class="bar"><i [style.width.%]="percent(bucket, data.by_priority)"></i></div>
+          <strong>{{ bucket.total }}</strong>
+        </div>
+      } @empty {
+        <p class="empty-state">Ainda não há prioridades registradas.</p>
+      }
+    </div>
+  </section>
+}

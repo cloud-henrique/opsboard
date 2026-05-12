@@ -1,0 +1,23 @@
+@use '../tokens/spacing' as spacing;
+@use './breakpoints' as media;
+
+@mixin auto-grid($min-size: 190px, $gap: spacing.space(12)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-size, 1fr));
+  gap: $gap;
+}
+
+@mixin paired-grid($wide-columns: 4, $wide-breakpoint: desktop, $mobile-breakpoint: mobile, $gap: spacing.space(12)) {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $gap;
+
+  @include media.up($wide-breakpoint) {
+    grid-template-columns: repeat($wide-columns, minmax(0, 1fr));
+  }
+
+  @include media.down($mobile-breakpoint) {
+    grid-template-columns: 1fr;
+  }
+}

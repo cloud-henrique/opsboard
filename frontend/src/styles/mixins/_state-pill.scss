@@ -1,0 +1,20 @@
+@use '../tokens/radius' as radius;
+@use '../tokens/spacing' as spacing;
+@use '../tokens/typography' as typography;
+
+@mixin state-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: spacing.space(2) spacing.space(10);
+  border: 1px solid var(--ops-border);
+  border-radius: radius.radius(pill);
+  background: var(--ops-white);
+  font-size: typography.font-size(sm);
+  font-weight: typography.font-weight(medium);
+}
+
+@mixin state-pill-color($color) {
+  color: $color;
+  border-color: color-mix(in srgb, #{$color} 34%, white);
+}

@@ -1,0 +1,55 @@
+<section class="login-page">
+  <div class="intro">
+    <span class="eyebrow">OpsBoard</span>
+    <h1>Painel operacional fullstack</h1>
+    <p>Solicitações, prazos, responsáveis, auditoria e indicadores em uma experiência de produto interno.</p>
+  </div>
+
+  <mat-card class="login-panel">
+    @if (loading) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <mat-card-header>
+      <mat-card-title>Entrar</mat-card-title>
+      <mat-card-subtitle>Use uma conta demo para acessar o painel.</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>mail</mat-icon>
+          <input matInput type="email" formControlName="email" autocomplete="email" />
+          @if (form.controls.email.touched && form.controls.email.invalid) {
+            <mat-error>Informe um email válido.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Senha</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="password" autocomplete="current-password" />
+          @if (form.controls.password.touched && form.controls.password.invalid) {
+            <mat-error>Informe a senha.</mat-error>
+          }
+        </mat-form-field>
+
+        @if (error) {
+          <p class="error">{{ error }}</p>
+        }
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+          Entrar
+        </button>
+      </form>
+
+      <div class="demo">
+        <strong>Credenciais demo</strong>
+        @for (account of demoAccounts; track account) {
+          <span>{{ account }}</span>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

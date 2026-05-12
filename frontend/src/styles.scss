@@ -1,0 +1,109 @@
+@use './styles/index' as ops;
+
+@include ops.color-variables;
+
+html {
+  height: 100%;
+  color-scheme: light;
+
+  @include ops.material-theme;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background: var(--mat-sys-background);
+  color: var(--ops-graphite);
+  font: var(--mat-sys-body-medium);
+}
+
+a {
+  color: inherit;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: ops.space(16);
+  margin-bottom: ops.space(20);
+}
+
+.page-header h1 {
+  margin: 0 0 ops.space(4);
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-weight: ops.font-weight(semibold);
+  letter-spacing: 0;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--ops-muted);
+}
+
+.surface {
+  @include ops.surface;
+}
+
+.content-section {
+  @include ops.content-section;
+}
+
+.form-grid,
+.filters-grid {
+  @include ops.auto-grid;
+}
+
+.actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: ops.space(10);
+}
+
+.status-pill,
+.priority-pill {
+  @include ops.state-pill;
+}
+
+.status-resolved {
+  @include ops.state-pill-color(var(--ops-success));
+}
+
+.status-cancelled,
+.priority-critical {
+  @include ops.state-pill-color(var(--ops-danger));
+}
+
+.priority-high {
+  @include ops.state-pill-color(var(--ops-warning));
+}
+
+.empty-state,
+.error-state {
+  padding: ops.space(28);
+  color: var(--ops-muted);
+  text-align: center;
+}
+
+.error-state {
+  color: var(--ops-danger);
+}
+
+.table-wrap {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+@include ops.down(mobile) {
+  .page-header {
+    flex-direction: column;
+  }
+}
