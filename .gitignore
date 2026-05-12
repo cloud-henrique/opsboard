@@ -1,0 +1,64 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Node / Angular
+node_modules/
+.angular/
+dist/
+coverage/
+.nyc_output/
+
+# PHP / Laravel
+vendor/
+storage/*.key
+storage/app/private/
+storage/framework/cache/data/
+storage/framework/sessions/
+storage/framework/testing/
+storage/framework/views/
+storage/logs/
+bootstrap/cache/*.php
+composer.phar
+.phpunit.cache/
+
+# Docker / local runtime
+.docker/data/
+docker-compose.override.yml
+
+# Database / exports
+*.sqlite
+*.sqlite3
+*.dump
+*.sql
+exports/
+
+# OS / temporary artifacts
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
