@@ -23,7 +23,7 @@ O projeto foi criado como case de portfólio para demonstrar product engineering
 ## Stack
 
 - Frontend: Angular 21, Angular Material 21, TypeScript, SCSS.
-- Backend: Laravel 13, Sanctum, PHP 8.4.
+- Backend: Laravel 13, Sanctum, PHP 8.3+; Docker usa PHP 8.4.
 - Database: PostgreSQL.
 - Infra: Docker Compose.
 - Workflow: documentação técnica, testes básicos e decisões arquiteturais registradas.
@@ -41,7 +41,19 @@ docker/     Dockerfiles e apoio local
 
 ## Screenshots
 
-Screenshots reais ainda devem ser capturados após subir o stack local. A lista esperada está em `docs/screenshots/README.md`.
+Screenshots reais capturados a partir do stack local com dados seed:
+
+| Login | Dashboard |
+| --- | --- |
+| ![Tela de login do OpsBoard](docs/screenshots/01-login.png) | ![Dashboard operacional com KPIs](docs/screenshots/02-dashboard.png) |
+
+| Solicitações | Detalhe |
+| --- | --- |
+| ![Lista de solicitações com filtros](docs/screenshots/03-requests-list.png) | ![Detalhe de solicitação com ações e auditoria](docs/screenshots/04-request-detail.png) |
+
+| Categorias | Auditoria |
+| --- | --- |
+| ![Gestão de categorias e importação CSV](docs/screenshots/05-categories-import.png) | ![Auditoria global com filtros](docs/screenshots/06-audit-logs.png) |
 
 ## Como rodar localmente
 
@@ -49,8 +61,8 @@ Pré-requisitos:
 
 - Docker 29+
 - Node 22+
-- npm 11+
-- PHP 8.4+
+- npm 11+ para desenvolvimento local do frontend
+- PHP 8.3+ para desenvolvimento local do backend; o Dockerfile usa PHP 8.4
 - Composer 2.8+
 
 Com Docker:
@@ -58,8 +70,7 @@ Com Docker:
 ```bash
 cp .env.example .env
 cp backend/.env.example backend/.env
-cd backend && php artisan key:generate
-cd ..
+docker compose run --rm backend sh -c "composer install && php artisan key:generate"
 docker compose up -d --build
 docker compose exec backend php artisan migrate:fresh --seed
 ```
@@ -70,7 +81,7 @@ URLs:
 - Backend: `http://localhost:8000`
 - Healthcheck: `http://localhost:8000/api/health`
 
-Se `8000` ou `4200` ja estiverem ocupadas, use portas alternativas pareadas:
+Se `8000` ou `4200` já estiverem ocupadas, use portas alternativas pareadas:
 
 ```bash
 BACKEND_PORT=8001 FRONTEND_PORT=4201 POSTGRES_PORT=5433 docker compose up -d --build
@@ -106,7 +117,7 @@ Todas usam a senha `password`.
 - API: `docs/api/backend-endpoints.md`
 - Decisões técnicas: `docs/decisions/`
 - Prompts preservados: `docs/prompts/`
-- Screenshots pendentes: `docs/screenshots/`
+- Screenshots reais: `docs/screenshots/`
 
 ## Decisões técnicas
 
@@ -135,11 +146,10 @@ npm run test
 
 ## Status do projeto
 
-Implementação funcional de portfólio em desenvolvimento. O projeto já cobre autenticação, domínio principal, permissões, auditoria, CSV, frontend operacional, Docker local e documentação. Screenshots reais ainda precisam ser capturados.
+Implementação funcional de portfólio em desenvolvimento. O projeto já cobre autenticação, domínio principal, permissões, auditoria, CSV, frontend operacional, Docker local, documentação técnica e screenshots reais.
 
 ## Próximos passos
 
-- Capturar screenshots reais.
 - Adicionar testes E2E leves.
 - Melhorar acessibilidade com revisão manual de teclado/leitores.
 - Adicionar licença se o repositório for publicado.

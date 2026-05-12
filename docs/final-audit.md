@@ -4,7 +4,7 @@
 
 OpsBoard está funcional como projeto fullstack demonstrativo: Laravel 13 API, Angular 21 SPA, PostgreSQL, Docker Compose, Sanctum SPA auth, permissões por papel, auditoria, dashboard, filtros e CSV.
 
-O projeto já comunica mais do que um CRUD genérico porque possui fluxo operacional, papéis, métricas, auditoria e documentação de decisões. O ponto visual pendente para publicação é capturar screenshots reais.
+O projeto já comunica mais do que um CRUD genérico porque possui fluxo operacional, papéis, métricas, auditoria, documentação de decisões e screenshots reais do produto.
 
 ## Validações executadas
 
@@ -15,6 +15,7 @@ Validações locais:
 - `cd frontend && npm run build`: passou.
 - `cd frontend && npm run test`: passou com 2 test files e 4 testes.
 - `docker compose config --quiet`: passou.
+- Screenshots reais capturados em `docs/screenshots/` a partir do stack local com dados seed.
 
 Validações Docker:
 
@@ -32,7 +33,6 @@ Validações Docker:
 - As portas padrão `8000` e `4200` estavam ocupadas por containers existentes no ambiente local.
 - `APP_ENV=local` estava fixado no `docker-compose.yml`, impedindo o PHPUnit dentro do container de usar `APP_ENV=testing`.
 - O frontend precisava de suporte a portas alternativas pareadas para validação local quando `4200/8000` estivessem ocupadas.
-- Screenshots reais ainda não foram capturados.
 
 ## Correções aplicadas
 
@@ -41,25 +41,24 @@ Validações Docker:
 - Backend Docker passou a usar `APP_URL`, `FRONTEND_URL`, CORS e Sanctum stateful domains baseados nas portas configuradas.
 - Frontend agora calcula o backend local pareado a partir da porta do navegador: `4200 -> 8000`, `4201 -> 8001`.
 - CORS e Sanctum agora possuem fallbacks locais para `4200/4201` e patterns para portas `42xx`, evitando erro quando o frontend roda em porta alternativa.
-- README, API docs, ADRs e screenshots placeholder foram criados/atualizados.
+- README, API docs, ADRs e screenshots reais foram criados/atualizados.
 
 ## Pendências
 
-- Capturar screenshots reais em `docs/screenshots/`.
 - Fazer revisão manual de acessibilidade com teclado.
-- Considerar testes E2E leves depois que screenshots existirem.
+- Considerar testes E2E leves.
 - Adicionar licença antes de publicar, se o repositório for público.
 
 ## Recomendações futuras
 
 - Adicionar paginação mais rica nas telas de usuários e categorias se o volume crescer.
 - Adicionar observabilidade simples para erros de API em ambiente real.
-- Criar um pequeno roteiro de demo no README após capturar screenshots.
+- Criar um pequeno roteiro de demo no README.
 - Considerar um workflow de CI para rodar backend tests e frontend build/test.
 
 ## Status final
 
-Pronto para publicação técnica no GitHub como projeto de portfólio, com uma ressalva: capturar screenshots reais antes de divulgar fortemente em LinkedIn/portfólio visual.
+Pronto para publicação técnica no GitHub como projeto de portfólio.
 
 Respostas da revisão de produto:
 
@@ -70,4 +69,4 @@ Respostas da revisão de produto:
 5. O README é suficiente para um recrutador/dev entender o projeto.
 6. O projeto comunica Angular, Laravel, PostgreSQL e Docker.
 7. O projeto comunica product engineering e manutenção real.
-8. Pode ser fixado no GitHub depois de adicionar screenshots.
+8. Pode ser fixado no GitHub com os screenshots já adicionados.

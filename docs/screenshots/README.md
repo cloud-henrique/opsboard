@@ -1,8 +1,8 @@
 # Screenshots
 
-Real screenshots should be captured after running the stack locally.
+Real screenshots captured from the local Docker stack with seeded demo data.
 
-Expected files:
+Files:
 
 - `01-login.png`
 - `02-dashboard.png`
@@ -11,9 +11,10 @@ Expected files:
 - `05-categories-import.png`
 - `06-audit-logs.png`
 
-Suggested flow:
+Reproducible flow:
 
 1. `docker compose up -d --build`
-2. Open `http://localhost:4200`
-3. Log in with `admin@opsboard.test / password`
-4. Capture the screens above and save them in this directory.
+2. `docker compose exec backend php artisan migrate:fresh --seed`
+3. Open `http://localhost:4200`
+4. Log in with `admin@opsboard.test / password`
+5. Capture the screens above and save them in this directory.

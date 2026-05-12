@@ -25,6 +25,13 @@
 - `docs/`: product specs, API docs, ADRs, screenshots, final audit, and preserved implementation prompts.
 - `docker/`: Dockerfiles and local service configuration for backend, frontend, nginx, and PostgreSQL support files.
 
+## Current implementation state
+
+- Demo users are seeded with the password `password`: `admin@opsboard.test`, `manager@opsboard.test`, `operator@opsboard.test`, and `viewer@opsboard.test`.
+- Main frontend routes live under `/app`: dashboard, requests, request detail/form, categories, users, and audit logs.
+- Screenshot assets are stored in `docs/screenshots/` and referenced from the root `README.md`.
+- The frontend maps paired local ports automatically: `4200 -> 8000`, `4201 -> 8001`, and so on.
+
 ## Development rules
 
 - Consult official documentation before using APIs that depend on framework versions.
