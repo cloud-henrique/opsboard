@@ -6,10 +6,22 @@
   gap: ops.space(16);
 }
 
+.category-grid > * {
+  min-width: 0;
+}
+
 form {
   display: grid;
   gap: ops.space(12);
   align-content: start;
+}
+
+form > * {
+  min-width: 0;
+}
+
+mat-form-field {
+  width: 100%;
 }
 
 h2 {
@@ -35,8 +47,39 @@ h2 {
   color: var(--ops-graphite);
 }
 
+.import-box span,
+.import-box p {
+  overflow-wrap: anywhere;
+}
+
+.import-box input {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
 @include ops.down(content) {
   .category-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@include ops.down(compact) {
+  .category-grid {
+    gap: ops.space(12);
+  }
+
+  form {
+    gap: ops.space(10);
+  }
+
+  h2 {
+    font-size: ops.font-size(lg);
+  }
+
+  .import-box {
+    margin-top: ops.space(8);
+    padding-top: ops.space(12);
+    font-size: ops.font-size(sm);
   }
 }

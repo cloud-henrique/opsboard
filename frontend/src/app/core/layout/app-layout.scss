@@ -84,6 +84,26 @@
     width: 76px;
   }
 
+  .brand {
+    justify-content: center;
+    padding: ops.space(16) ops.space(8);
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  mat-nav-list {
+    padding-inline: ops.space(8);
+  }
+
+  .sidebar a[mat-list-item] {
+    padding-right: 0;
+    --mat-list-list-item-leading-icon-start-space: 14px;
+    --mat-list-list-item-leading-icon-end-space: 14px;
+  }
+
   .brand div,
   a span[matListItemTitle],
   .topbar-title {
@@ -93,5 +113,40 @@
   .main-content {
     width: min(100% - 20px, 1180px);
     padding-top: ops.space(18);
+  }
+}
+
+@include ops.down(compact) {
+  .sidebar {
+    width: 56px;
+  }
+
+  .brand {
+    padding: ops.space(10) 0;
+  }
+
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: ops.radius(sm);
+  }
+
+  mat-nav-list {
+    padding-inline: ops.space(4);
+  }
+
+  .sidebar a[mat-list-item] {
+    --mat-list-list-item-leading-icon-start-space: 12px;
+    --mat-list-list-item-leading-icon-end-space: 12px;
+  }
+
+  .topbar {
+    padding-inline: ops.space(8);
+  }
+
+  .main-content {
+    width: min(100% - 16px, 1180px);
+    padding-top: ops.space(14);
+    padding-bottom: ops.space(32);
   }
 }
