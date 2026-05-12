@@ -25,9 +25,13 @@
   height: 42px;
   place-items: center;
   border-radius: ops.radius(md);
-  background: var(--ops-graphite);
-  color: var(--ops-white);
-  font-weight: ops.font-weight(bold);
+  overflow: hidden;
+}
+
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .brand strong,
